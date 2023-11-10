@@ -1,0 +1,20 @@
+<div class="container py-5" th:fragment="clientEdit">
+    <h1>Edit Client</h1>
+    <form action="/client/edit" method="post" class="mb-3">
+        <!--/*@thymesVar id="client" type="me.bnnq.homework.Models.Client"*/-->
+        <input type="hidden" name="id" th:value="${client.getId()}">
+        <div class="mb-3">
+            <label class="form-label" for="firstNameInput">First Name</label>
+            <input type="text" name="firstName" id="firstNameInput" th:value="${client.getFirstName()}" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="lastNameInput">Last Name</label>
+            <input type="text" name="lastName" id="lastNameInput" th:value="${client.getLastName()}" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="emailInput">Email</label>
+            <input type="email" name="email" id="emailInput" th:value="${client.getEmail()}" class="form-control" required>
+        </div>
+        <input type="submit" value="Save" class="btn btn-primary w-100">
+    </form>
+</div>

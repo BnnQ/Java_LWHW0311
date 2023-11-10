@@ -1,0 +1,34 @@
+<div class="container" th:fragment="queryResult">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <!--/*@thymesVar id="query" type="java.lang.String"*/-->
+            <table class="table table-striped mt-5">
+                <thead th:switch="${query}">
+                <tr th:case="'averageRentalDuration'">
+                    <th>Average rental duration (days)</th>
+                </tr>
+                <tr th:case="'minimumRentalDuration'">
+                    <th>Minimum rental duration (days)</th>
+                </tr>
+                <tr th:case="'maximumRentalDuration'">
+                    <th>Maximum rental duration (days)</th>
+                </tr>
+                </thead>
+                <tbody th:switch="${query}">
+                <tr th:case="'averageRentalDuration'">
+                    <!--/*@thymesVar id="averageRentalDuration" type="java.lang.Integer"*/-->
+                    <td th:text="${averageRentalDuration}"></td>
+                </tr>
+                <tr th:case="'minimumRentalDuration'">
+                    <!--/*@thymesVar id="minimumRentalDuration" type="java.lang.Integer"*/-->
+                    <td th:text="${minimumRentalDuration}"></td>
+                </tr>
+                <tr th:case="'maximumRentalDuration'">
+                    <!--/*@thymesVar id="maximumRentalDuration" type="java.lang.Integer"*/-->
+                    <td th:text="${maximumRentalDuration}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="container py-5" th:fragment="apartmentEdit">
+    <h1>Edit Apartment</h1>
+    <form action="/apartment/edit" method="post" class="mb-3">
+        <!--/*@thymesVar id="apartment" type="me.bnnq.homework.Models.Apartment"*/-->
+        <input type="hidden" name="id" th:value="${apartment.getId()}">
+        <div class="mb-3">
+            <label class="form-label" for="addressInput">Address</label>
+            <input type="text" name="address" id="addressInput" th:value="${apartment.getAddress()}" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="landlordInput">Landlord</label>
+            <select name="landlordId" id="landlordInput" class="form-select" required>
+                <!--/*@thymesVar id="landlords" type="me.bnnq.homework.Models.Landlord[]"*/-->
+                <option th:with="landlord=${apartment.getLandlord()}" th:if="${landlord != null}" th:value="${landlord.getId()}" th:text="${landlord.getFirstName()} + ' ' + ${landlord.getLastName()}" selected></option>
+                <option th:each="landlord : ${landlords}" th:value="${landlord.getId()}" th:text="${landlord.getFirstName()} + ' ' + ${landlord.getLastName()}"></option>
+            </select>
+        </div>
+        <input type="submit" value="Save" class="btn btn-primary w-100">
+    </form>
+</div>

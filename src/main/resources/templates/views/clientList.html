@@ -1,0 +1,68 @@
+<div class="container py-5" th:fragment="clientList">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3">
+            <h2>Filter Options</h2>
+            <form action="/clients" method="get">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-control">
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" id="rentCurrentMonth" name="rentCurrentMonth" class="form-check-input">
+                    <label class="form-check-label" for="rentCurrentMonth">Rented this month</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" id="rentEndsThisMonth" name="rentEndsThisMonth" class="form-check-input">
+                    <label class="form-check-label" for="rentEndsThisMonth">Rental ends this month</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" id="rentLessThanMonth" name="rentLessThanMonth" class="form-check-input">
+                    <label class="form-check-label" for="rentLessThanMonth">Rental duration less than a month</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" id="rentMoreThanYear" name="rentMoreThanYear" class="form-check-input">
+                    <label class="form-check-label" for="rentMoreThanYear">Rental duration more than a year</label>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Apply Filters</button>
+            </form>
+        </div>
+        <!-- Content -->
+        <div class="col-md-9">
+            <h1>Clients</h1>
+            <a href="/client/create" class="btn btn-primary">Add new client</a>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Rental</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!--/*@thymesVar id="clients" type="me.bnnq.homework.Models.Client[]"*/-->
+                <tr th:each="client : ${clients}">
+                    <td th:text="${client.getFirstName()}"></td>
+                    <td th:text="${client.getLastName()}"></td>
+                    <td th:text="${client.getEmail()}"></td>
+                    <td th:with="rental=${client.getRental()}"
+                        th:text="${rental != null} ? ${#strings.concat('Rent Start Date: ', rental.rentStartDate, ', Rent End Date: ', rental.rentEndDate, ', Landlord: ', rental.apartment.landlord.firstName, ' ', rental.apartment.landlord.lastName)} : 'Without rental'"></td>
+                    <td>
+                        <a th:href="'/client/edit/' + ${client.getId()}" class="btn btn-primary mb-1 w-100">Edit</a>
+                        <a th:href="'/client/delete/' + ${client.getId()}" class="btn btn-danger mb-1 w-100">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

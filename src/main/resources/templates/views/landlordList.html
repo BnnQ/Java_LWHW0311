@@ -1,0 +1,28 @@
+<div class="container py-5" th:fragment="landlordList">
+    <h1>Landlords</h1>
+    <a href="/landlord/create" class="btn btn-primary">Add new landlord</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Apartments</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--/*@thymesVar id="landlords" type="me.bnnq.homework.Models.Landlord[]"*/-->
+        <tr th:each="landlord : ${landlords}">
+            <td th:text="${landlord.getFirstName()}"></td>
+            <td th:text="${landlord.getLastName()}"></td>
+            <td th:text="${landlord.getEmail()}"></td>
+            <td th:with="apartments=${landlord.getApartments()}"
+                th:text="${apartments != null} ? ${#strings.concat('Number of Apartments: ', #lists.size(apartments))} : 'No apartments'"></td>
+            <td>
+                <a th:href="'/landlord/edit/' + ${landlord.getId()}" class="btn btn-primary mb-1 w-100">Edit</a>
+                <a th:href="'/landlord/delete/' + ${landlord.getId()}" class="btn btn-danger mb-1 w-100">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,26 @@
+<div class="container py-5" th:fragment="apartmentList">
+    <h1>Apartments</h1>
+    <a href="/apartment/create" class="btn btn-primary">Add new apartment</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Address</th>
+            <th scope="col">Landlord</th>
+            <th scope="col">Rental</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--/*@thymesVar id="apartments" type="me.bnnq.homework.Models.Apartment[]"*/-->
+        <tr th:each="apartment : ${apartments}">
+            <td th:text="${apartment.getAddress()}"></td>
+            <td th:text="${apartment.getLandlord() != null} ? ${#strings.concat(apartment.getLandlord().getFirstName(), ' ', apartment.getLandlord().getLastName())} : 'No landlord'"></td>
+            <td th:with="rental=${apartment.getRental()}"
+                th:text="${rental != null} ? ${#strings.concat('Rent Start Date: ', rental.rentStartDate, ', Rent End Date: ', rental.rentEndDate, ', Landlord: ', rental.apartment.landlord.firstName, ' ', rental.apartment.landlord.lastName, ', ', 'Client: ', rental.client.getFirstName(), ' ', rental.client.getLastName())} : 'Without rental'"></td>
+            <td>
+                <a th:href="'/apartment/edit/' + ${apartment.getId()}" class="btn btn-primary mb-1 w-100">Edit</a>
+                <a th:href="'/apartment/delete/' + ${apartment.getId()}" class="btn btn-danger mb-1 w-100">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

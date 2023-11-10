@@ -1,0 +1,18 @@
+<div class="container py-5" th:fragment="clientCreate">
+    <h1>Create Client</h1>
+    <form action="/client/create" method="post" class="mb-3">
+        <div class="mb-3">
+            <label class="form-label" for="firstNameInput">First Name</label>
+            <input type="text" name="firstName" placeholder="First Name" id="firstNameInput" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="lastNameInput">Last Name</label>
+            <input type="text" name="lastName" placeholder="Last Name" id="lastNameInput" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="emailInput">Email</label>
+            <input type="email" name="email" placeholder="Email" id="emailInput" class="form-control" required>
+        </div>
+        <input type="submit" value="Create" class="btn btn-primary w-100">
+    </form>
+</div>

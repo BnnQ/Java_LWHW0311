@@ -1,0 +1,28 @@
+<div class="container py-5" th:fragment="landlordEdit">
+    <h1>Edit Landlord</h1>
+    <form action="/landlord/edit" method="post" class="mb-3">
+        <!--/*@thymesVar id="landlord" type="me.bnnq.homework.Models.Landlord"*/-->
+        <input type="hidden" name="id" th:value="${landlord.getId()}">
+        <div class="mb-3">
+            <label class="form-label" for="firstNameInput">First Name</label>
+            <input type="text" name="firstName" id="firstNameInput" th:value="${landlord.getFirstName()}" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="lastNameInput">Last Name</label>
+            <input type="text" name="lastName" id="lastNameInput" th:value="${landlord.getLastName()}" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="emailInput">Email</label>
+            <input type="email" name="email" id="emailInput" th:value="${landlord.getEmail()}" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="apartmentInput">Apartment</label>
+            <select th:with="currentApartments=${landlord.getApartments()}" name="apartmentIds" id="apartmentInput" class="form-select" multiple required>
+                <option value="0" th:selected="${currentApartments == null || currentApartments.isEmpty()}">Without apartment</option>
+                <!--/*@thymesVar id="apartments" type="me.bnnq.homework.Models.Apartment[]"*/-->
+                <option th:each="apartment : ${apartments}" th:value="${apartment.getId()}" th:text="${apartment.getAddress()}" th:selected="${landlord.getApartments().contains(apartment)}"></option>
+            </select>
+        </div>
+        <input type="submit" value="Save" class="btn btn-primary w-100">
+    </form>
+</div>

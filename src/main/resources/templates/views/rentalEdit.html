@@ -1,0 +1,32 @@
+<div class="container py-5" th:fragment="rentalEdit">
+    <h1>Edit Rental</h1>
+    <form action="/rental/edit" method="post" class="mb-3">
+        <!--/*@thymesVar id="rental" type="me.bnnq.homework.Models.Rental"*/-->
+        <input type="hidden" name="id" th:value="${rental.getId()}">
+        <div class="mb-3">
+            <label class="form-label" for="clientInput">Client</label>
+            <select name="clientId" id="clientInput" class="form-select" required>
+                <!--/*@thymesVar id="clients" type="me.bnnq.homework.Models.Client[]"*/-->
+                <option th:with="client=${rental.getClient()}" th:value="${client.getId()}" th:text="${client.getFirstName()} + ' ' + ${client.getLastName()}" selected></option>
+                <option th:each="client : ${clients}" th:value="${client.getId()}" th:text="${client.getFirstName()} + ' ' + ${client.getLastName()}" th:selected="${rental.getClient() != null && client.getId() == rental.getClient().getId()}"></option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="apartmentInput">Apartment</label>
+            <select name="apartmentId" id="apartmentInput" class="form-select" required>
+                <!--/*@thymesVar id="apartments" type="me.bnnq.homework.Models.Apartment[]"*/-->
+                <option th:with="apartment=${rental.getApartment()}" th:value="${apartment.getId()}" th:text="${apartment.getAddress()}" selected></option>
+                <option th:each="apartment : ${apartments}" th:value="${apartment.getId()}" th:text="${apartment.getAddress()}" th:selected="${rental.getApartment() != null && apartment.getId() == rental.getApartment().getId()}"></option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="startDateInput">Rent Start Date</label>
+            <input type="date" name="rentStartDate" id="startDateInput" th:value="${#dates.format(rental.getRentStartDate(), 'yyyy-MM-dd')}" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="endDateInput">Rent End Date</label>
+            <input type="date" name="rentEndDate" id="endDateInput" th:value="${#dates.format(rental.getRentEndDate(), 'yyyy-MM-dd')}" class="form-control" required>
+        </div>
+        <input type="submit" value="Save" class="btn btn-primary w-100">
+    </form>
+</div>

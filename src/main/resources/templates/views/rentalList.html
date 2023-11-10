@@ -1,0 +1,58 @@
+<div class="container py-5" th:fragment="rentalList">
+    <div class="row">
+        <h1>Rentals</h1>
+        <a href="/rental/create" class="btn btn-primary">Add new rental</a>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Client</th>
+                <th scope="col">Apartment</th>
+                <th scope="col">Rent Start Date</th>
+                <th scope="col">Rent End Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--/*@thymesVar id="rentals" type="me.bnnq.homework.Models.Rental[]"*/-->
+            <tr th:each="rental : ${rentals}">
+                <td th:text="${rental.getClient() != null} ? ${#strings.concat(rental.getClient().getFirstName(), ' ', rental.getClient().getLastName())} : 'No client'"></td>
+                <td th:text="${rental.getApartment() != null} ? ${rental.getApartment().getAddress()} : 'No apartment'"></td>
+                <td th:text="${rental.getRentStartDate() != null} ? ${#dates.format(rental.getRentStartDate(), 'yyyy-MM-dd')} : 'No start date'"></td>
+                <td th:text="${rental.getRentEndDate() != null} ? ${#dates.format(rental.getRentEndDate(), 'yyyy-MM-dd')} : 'No end date'"></td>
+                <td>
+                    <a th:href="'/rental/edit/' + ${rental.getId()}" class="btn btn-primary mb-1 w-100">Edit</a>
+                    <a th:href="'/rental/delete/' + ${rental.getId()}" class="btn btn-danger mb-1 w-100">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <h2 class="text-center mt-4">Menu</h2>
+            <div class="container">
+                <div class="row mb-2">
+                    <div class="col">
+                        <a href="/query?q=averageRentalDuration"
+                           class="btn btn-primary m-0 fs-6 w-100 w-100">
+                            Show average rental duration
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="/query?q=minimumRentalDuration"
+                           class="btn btn-primary m-0 fs-6 w-100 w-100">
+                            Show minimum rental duration
+                        </a>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <a href="/query?q=maximumRentalDuration"
+                           class="btn btn-primary m-0 fs-6 w-100 w-100">
+                            Show maximum rental duration
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
