@@ -1,0 +1,36 @@
+<!--/*@thymesVar id="view" type="java.lang.String"*/-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{sections/head::head}">
+    <meta charset="UTF-8">
+    <!--/*@thymesVar id="title" type="java.lang.String"*/-->
+    <title th:title="${title != null} ? ${title} : ${view}"></title>
+</head>
+<body>
+<header th:insert="~{sections/header::header}"></header>
+<!-- ---------------VIEWS SECTION--------------- -->
+<!--       Register all existing views here      -->
+<div th:switch="${view}">
+    <div th:case="'menu'" th:insert="~{views/menu::menu}"></div>
+    <div th:case="'clientList'" th:insert="~{views/clientList::clientList}"></div>
+    <div th:case="'clientCreate'" th:insert="~{views/clientCreate::clientCreate}"></div>
+    <div th:case="'clientEdit'" th:insert="~{views/clientEdit::clientEdit}"></div>
+    <div th:case="'landlordList'" th:insert="~{views/landlordList::landlordList}"></div>
+    <div th:case="'landlordCreate'" th:insert="~{views/landlordCreate::landlordCreate}"></div>
+    <div th:case="'landlordEdit'" th:insert="~{views/landlordEdit::landlordEdit}"></div>
+    <div th:case="'apartmentList'" th:insert="~{views/apartmentList::apartmentList}"></div>
+    <div th:case="'apartmentCreate'" th:insert="~{views/apartmentCreate::apartmentCreate}"></div>
+    <div th:case="'apartmentEdit'" th:insert="~{views/apartmentEdit::apartmentEdit}"></div>
+    <div th:case="'rentalList'" th:insert="~{views/rentalList::rentalList}"></div>
+    <div th:case="'rentalCreate'" th:insert="~{views/rentalCreate::rentalCreate}"></div>
+    <div th:case="'rentalEdit'" th:insert="~{views/rentalEdit::rentalEdit}"></div>
+    <div th:case="'queryResult'" th:insert="~{views/queryResult::queryResult}"></div>
+    <div th:case="*">
+        <h1 class="text-danger" th:text="|Error: view with name '${view}' was not found in 'resources/views/' folder, or this view is not registered. You can register the view in a special section in layout.html.|"></h1>
+    </div>
+</div>
+<!-- ---------------VIEWS SECTION--------------- -->
+
+<footer th:insert="~{sections/footer::footer}"></footer>
+</body>
+</html>
