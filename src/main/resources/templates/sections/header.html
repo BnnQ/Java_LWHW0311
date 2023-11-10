@@ -1,0 +1,16 @@
+<div th:fragment="header" class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+        <span class="fs-4">Rent</span>
+    </a>
+
+    <ul class="nav nav-pills">
+        <!--/*@thymesVar id="view" type="java.lang.String"*/-->
+        <li class="nav-item"><a href="/" th:classappend="${view == 'menu' ? 'active' : ''}" class="nav-link">Menu</a></li>
+        <li class="nav-item"><a href="/clients" th:classappend="${view == 'clientList' || view == 'clientCreate' || view == 'clientEdit' ? 'active' : ''}" class="nav-link">Clients</a></li>
+        <li class="nav-item"><a href="/landlords" th:classappend="${view == 'landlordList' || view == 'landlordCreate' || view == 'landlordEdit' ? 'active' : ''}" class="nav-link">Landlords</a></li>
+        <li class="nav-item"><a href="/apartments" th:classappend="${view == 'apartmentList' || view == 'apartmentCreate' || view == 'apartmentEdit' ? 'active' : ''}" class="nav-link">Apartments</a></li>
+        <li class="nav-item"><a href="/rentals" th:classappend="${view == 'rentalList' || view == 'rentalCreate' || view == 'rentalEdit' ? 'active' : ''}" class="nav-link">Rentals</a></li>
+    </ul>
+
+</div>
